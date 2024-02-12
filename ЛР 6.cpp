@@ -16,11 +16,28 @@ string replace_space(string row) {
 
 void print_the_sine_wave(string row) {
     int len_row = row.size(); //длина введенной строки
-    int mirror_mas[] = { 1,4,7,9,7,4}; //массив для зеркального отображения
+    int mirror_mas[] = { 1,4,7,9,7,4, 1}; //массив для зеркального отображения
     int index_mas[] = { 4,2,1,0,10,11,13 }; //сдвиг
     for (int y = 0; y < 7; y++) { //переход по строкам
         for (int x = 0; x < len_row; x++) { //переход по столбцам
-            if (y == 0) {
+            if (y == 1 || y == 5) {
+                if ((x - index_mas[y]) % 18 == 0 || (x - index_mas[y] - 1) % 18 == 0 || (x - index_mas[y] - mirror_mas[y]) % 18 == 0 || (x - index_mas[y] - 1 - mirror_mas[y]) % 18 == 0) {
+                    cout << row[x];
+                }
+                else {
+                    cout << '-';
+                }
+            }
+            else {
+                if ((x - index_mas[y]) % 18 == 0 || (x - index_mas[y] - mirror_mas[y]) % 18 == 0) {
+                    cout << row[x];
+                }
+                else {
+                    cout << '-';
+                }
+            }
+
+            /*if (y == 0) {
                 if ((x - 4) % 18 == 0 || (x - 4 - mirror_mas[y]) % 18 == 0) {
                     cout << row[x];
                 }
@@ -76,7 +93,7 @@ void print_the_sine_wave(string row) {
                 else {
                     cout << '-';
                 }
-            }
+            }*/
         }
         cout << endl;
     }
