@@ -1,124 +1,62 @@
 #include <iostream>
 #include <string>
 
-
-
 using namespace std;
 
-string replace_space(string row) {
-    for (int i = 0; i < row.size(); i++) {
-        if (row[i] == 32) { //если символ равен пробелу
-            row[i] = '_'; //заменяю символ на _
-        }
-    }
-    return row;
+char replace_space(char symbol) { //замена пробела на _
+    if (symbol == 32) { //если символ равен пробелу
+        symbol = '_'; //заменяю символ на _
+     }
+    return symbol;
 }
 
 void print_the_sine_wave(string row) {
     int len_row = row.size(); //длина введенной строки
     int mirror_mas[] = { 1,4,7,9,7,4, 1}; //массив для зеркального отображения
-    int index_mas[] = { 4,2,1,0,10,11,13 }; //сдвиг
+    int index_mas[] = { 4,2,1,0,10,11,13 }; //сдвиг по x слева
+
     for (int y = 0; y < 7; y++) { //переход по строкам
         for (int x = 0; x < len_row; x++) { //переход по столбцам
             if (y == 1 || y == 5) {
                 if ((x - index_mas[y]) % 18 == 0 || (x - index_mas[y] - 1) % 18 == 0 || (x - index_mas[y] - mirror_mas[y]) % 18 == 0 || (x - index_mas[y] - 1 - mirror_mas[y]) % 18 == 0) {
-                    cout << row[x];
+                    cout << replace_space(row[x]);
                 }
                 else {
-                    cout << '-';
+                    cout << ' ';
                 }
             }
             else {
                 if ((x - index_mas[y]) % 18 == 0 || (x - index_mas[y] - mirror_mas[y]) % 18 == 0) {
-                    cout << row[x];
+                    cout << replace_space(row[x]);
                 }
                 else {
-                    cout << '-';
+                    cout << ' ';
                 }
             }
-
-            /*if (y == 0) {
-                if ((x - 4) % 18 == 0 || (x - 4 - mirror_mas[y]) % 18 == 0) {
-                    cout << row[x];
-                }
-                else {
-                    cout << '-';
-                }
-            }
-            if (y == 1) {
-                if ((x - 2) % 18 == 0 || (x - 2 - 1) % 18 == 0 || (x - 2 - mirror_mas[y]) % 18 == 0 || (x - 2 - 1 - mirror_mas[y]) % 18 == 0) {
-                    cout << row[x];
-                }
-                else {
-                    cout << '-';
-                }
-            }
-
-            if (y == 2) {
-                if ((x - 1) % 18 == 0 || (x - 1 - mirror_mas[y]) % 18 == 0) {
-                    cout << row[x];
-                }
-                else {
-                    cout << '-';
-                }
-            }
-            if (y == 3) {
-                if ((x) % 18 == 0 || (x - mirror_mas[y]) % 18 == 0) {
-                    cout << row[x];
-                }
-                else {
-                    cout << '-';
-                }
-            }
-            if (y == 4) {
-                if (((x - 10) % 18 == 0) || (x - 10 - mirror_mas[y]) % 18 == 0) {
-                    cout << row[x];
-                }
-                else {
-                    cout << '-';
-                }
-            }
-            if (y == 5) {
-                if ((x - 11) % 18 == 0 || (x - 11 - 1) % 18 == 0 || (x - 11 - mirror_mas[y]) % 18 == 0 || (x - 11 - 1 - mirror_mas[y]) % 18 == 0) {
-                    cout << row[x];
-                }
-                else {
-                    cout << '-';
-                }
-            }
-            if (y == 6) {
-                if ((x - 13) % 18 == 0 || (x - 13 - mirror_mas[y]) % 18 == 0) {
-                    cout << row[x];
-                }
-                else {
-                    cout << '-';
-                }
-            }*/
         }
         cout << endl;
     }
-
 }
 
 int main() {
     setlocale(LC_ALL, "Russian");
-    system("chcp 1251");
+    system("chcp 1251"); //подключение русского при выводе
     system("cls");
 
-    string word;
-    //cout << "Введите предложение" << endl;
-    //getline(cin, word);
-    word = "первый второй третий четвертый первый второй третий четвертый первый второй третий четвертый";
+    string a_set_of_letters;
 
-    cout << "Ваше предложение: " << word << endl;
-    cout <<"Длина вашего предложения " << word.size() << endl;
+    cout << "Введите предложение" << endl;
+    getline(cin, a_set_of_letters); //ввод предложения в  переменную a_set_of_letters
     
-    word = replace_space(word);
+    cout << endl;
 
-    cout << "Ваше новое предложение: " << word << endl;
+    //Благоуханна и светла Уж с февраля весна в сады вошла — И вот миндаль мгновенно зацвела, И белизна всю зелень облила.
+    //Дни настают борьбы и торжества, Достигнет Русь завещанных границ, И будет старая Москва Новейшею из трех ее столиц.
+    //Умом — Россию не понять, Аршином общим не измерить. У ней особенная стать — В Россию можно только верить.
+
+    cout << "Ваше предложение будет выведено в виде синусоида " << endl << endl;
     
-    print_the_sine_wave(word);
-
+    print_the_sine_wave(a_set_of_letters); //вывод предложения в виде синусоида
 
     return 0;
 }
